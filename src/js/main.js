@@ -8,11 +8,49 @@
 
 //4_Una vez transformada la respuesta, ahora la recogemos 
 
-fetch ('http://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita').then((response)=> response.json()
-).then((info)=> {
-    info = coctailData;
-    paintHtml();
-});
+// fetch ('http://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita').then((response)=> response.json()
+// ).then((info)=> {
+//     info = coctailData;
+//     paintHtml();
+// });
+
+
+//constante para luego poder pintarla
+
+
+
+//1_obtener los datos de una API (fetch)
+//2_Los metemos en una función
+//3_ejecutamos la función
+
+//4_guardamos la información en un array (así podemos utilizarla más tarde en diferentes momentos)
+
+// constantes globales 
+
+const cocktailFinder = document.querySelector('.js-cocktailFinder');
+
+let cocktailList = [];
+
+
+function getApiCocktail(){
+
+  fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita')
+    .then(response => response.json())
+    .then(data => {
+      cocktailList = data.drinks;
+    });
+
+}
+
+getApiCocktail();
+
+// función para que pinte la información obtenida
+
+function paintCocktail(){
+}
+    
+
+
 
 
 
@@ -22,10 +60,10 @@ fetch ('http://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita').then
 
 // //después ejecutamos esa función cuando then nos haya dado la respuesta, si la llamo antes no me va a pintar nada porque no le ha llegado la información
 
-Function paintHtml(){
-    const img = document.querySelector('.');
-    img.src = info.message;
-}
+// Function paintCoc(){
+//     const img = document.querySelector('.');
+//     img.src = info.message;
+// }
 
 
 

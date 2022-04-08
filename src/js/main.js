@@ -3,10 +3,10 @@
 //1_enviamos petición al servidor, a una API(fetch)
 
 //2_ then es la promesa que nos devuelve el servidor, y recibe entre los paréntesis un función (response)
- 
+
 //3_después esa respuesta la tenemos que transformar a formato json para que podamos acceder a cada uno de los datos (response.json)
 
-//4_Una vez transformada la respuesta, ahora la recogemos 
+//4_Una vez transformada la respuesta, ahora la recogemos
 
 // fetch ('http://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita').then((response)=> response.json()
 // ).then((info)=> {
@@ -25,7 +25,7 @@
 
 //4_guardamos la información en un array (así podemos utilizarla más tarde en diferentes momentos)
 
-// constantes globales 
+// constantes globales
 
 const cocktailFinder = document.querySelector('.js-cocktailFinder');
 const searchButton = document.querySelector('.js-searchButton');
@@ -40,40 +40,31 @@ function getApiCocktail(){
     .then(response => response.json())
     .then(data => {
       cocktailList = data.drinks;
-      console.log(cocktailList);
     });
 }
 
-
-
 // función para que pinte la información obtenida
 
+function paintCocktail() {
+  let htmlDrink = '';
+  for (const drink of cocktailList) {
+    htmlDrink += `<li>`;
+    htmlDrink += `<h2>${drink.strDrink}</h2>`;
+    htmlDrink += `<img src="${drink.strDrinkThumb}" width="200"/>`;
+    htmlDrink += `</li>`;
+  }
+  drinksList.innerHTML = htmlDrink;
+}
 
 
-// function paintCocktail(){
-//   let dataCocktail = '';
-//   for(const drink of cocktailList){
-//     drink += `<li>`;
-//     drink += `<h2>${drink.strDrink}</h2>`;
-//     drink += `<img ${strDrinkThumb}/>`;  function paintCocktail(){
-//     drink += `</li>`;
-
-// }
-//   cocktailList.innerHTML = dataCocktail;
-
-// }
-
-// paintCocktail();
-
-
-// Función manejadora
+//Función manejadora
 
 function handleClickButton(event) {
   event.preventDefault();
   getApiCocktail();
+  paintCocktail();
 }
 
 //evento
 
 searchButton.addEventListener('click', handleClickButton);
-

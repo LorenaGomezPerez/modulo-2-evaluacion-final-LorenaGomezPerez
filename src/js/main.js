@@ -29,57 +29,51 @@
 
 const cocktailFinder = document.querySelector('.js-cocktailFinder');
 const searchButton = document.querySelector('.js-searchButton');
-const cocktailList = document.querySelector('.js-cocktailList');
+const drinksList = document.querySelector('.js-cocktailList');
 
 let cocktailList = [];
 
 
 function getApiCocktail(){
-
-  fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita')
+  const inputFinder = cocktailFinder.value;
+  fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${inputFinder}`)
     .then(response => response.json())
     .then(data => {
       cocktailList = data.drinks;
+      console.log(cocktailList);
     });
 }
 
-getApiCocktail();
+
 
 // función para que pinte la información obtenida
 
-function paintCocktail(){
-  let dataCocktail = '';
-  for(const drink of cocktailList){
-    drink += `<li>`;
-    drink += `<h2>${drink.strDrink}</h2>`;
-    drink += `<img ${strDrinkThumb}/>`;
-    drink += `</li>`;
-
-}
-  cocktailList.innerHTML = dataCocktail;
-
-}
-
-paintCocktail();
 
 
+// function paintCocktail(){
+//   let dataCocktail = '';
+//   for(const drink of cocktailList){
+//     drink += `<li>`;
+//     drink += `<h2>${drink.strDrink}</h2>`;
+//     drink += `<img ${strDrinkThumb}/>`;  function paintCocktail(){
+//     drink += `</li>`;
 
-    
+// }
+//   cocktailList.innerHTML = dataCocktail;
 
-
-
-
-
-
-// //.Una función que me pinte en el src la ruta de la imagen elegida.
-// // message porque es donde está la información que necesitamos
-
-// //después ejecutamos esa función cuando then nos haya dado la respuesta, si la llamo antes no me va a pintar nada porque no le ha llegado la información
-
-// Function paintCoc(){
-//     const img = document.querySelector('.');
-//     img.src = info.message;
 // }
 
+// paintCocktail();
 
+
+// Función manejadora
+
+function handleClickButton(event) {
+  event.preventDefault();
+  getApiCocktail();
+}
+
+//evento
+
+searchButton.addEventListener('click', handleClickButton);
 

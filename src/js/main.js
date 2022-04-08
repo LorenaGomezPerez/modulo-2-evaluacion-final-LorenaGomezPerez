@@ -28,6 +28,8 @@
 // constantes globales 
 
 const cocktailFinder = document.querySelector('.js-cocktailFinder');
+const searchButton = document.querySelector('.js-searchButton');
+const cocktailList = document.querySelector('.js-cocktailList');
 
 let cocktailList = [];
 
@@ -39,7 +41,6 @@ function getApiCocktail(){
     .then(data => {
       cocktailList = data.drinks;
     });
-
 }
 
 getApiCocktail();
@@ -47,7 +48,22 @@ getApiCocktail();
 // función para que pinte la información obtenida
 
 function paintCocktail(){
+  let dataCocktail = '';
+  for(const drink of cocktailList){
+    drink += `<li>`;
+    drink += `<h2>${drink.strDrink}</h2>`;
+    drink += `<img ${strDrinkThumb}/>`;
+    drink += `</li>`;
+
 }
+  cocktailList.innerHTML = dataCocktail;
+
+}
+
+paintCocktail();
+
+
+
     
 
 

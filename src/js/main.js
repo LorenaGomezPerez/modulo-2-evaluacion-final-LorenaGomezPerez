@@ -8,16 +8,7 @@
 
 //4_Una vez transformada la respuesta, ahora la recogemos
 
-// fetch ('http://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita').then((response)=> response.json()
-// ).then((info)=> {
-//     info = coctailData;
-//     paintHtml();
-// });
-
-
 //constante para luego poder pintarla
-
-
 
 //1_obtener los datos de una API (fetch)
 //2_Los metemos en una función
@@ -30,9 +21,9 @@
 const cocktailFinder = document.querySelector('.js-cocktailFinder');
 const searchButton = document.querySelector('.js-searchButton');
 const drinksList = document.querySelector('.js-cocktailList');
+const favDrinksList = document.querySelector('.js-favCocktailsList');
 
 let cocktailList = [];
-
 
 function getApiCocktail(){
   const inputFinder = cocktailFinder.value;
@@ -40,7 +31,19 @@ function getApiCocktail(){
     .then(response => response.json())
     .then(data => {
       cocktailList = data.drinks;
+      paintCocktail();
     });
+}
+
+//función cócteles favoritos
+
+function favCocktails(){
+
+  //listener cuando la usuaria de click al cocktail elegido
+  const liDrink = document.querySelectorAll('.js-liDrink');
+  for (const cocktail of liDrink){
+    cocktail.addEventListener('click', handleClickSelectedDrink);
+  }
 }
 
 // función para que pinte la información obtenida
@@ -48,12 +51,14 @@ function getApiCocktail(){
 function paintCocktail() {
   let htmlDrink = '';
   for (const drink of cocktailList) {
-    htmlDrink += `<li>`;
+
+    htmlDrink += `<li class="cocktail-list js-liDrink" id=${drink.idDrink}>`;
     htmlDrink += `<h2>${drink.strDrink}</h2>`;
     htmlDrink += `<img src="${drink.strDrinkThumb}" width="200"/>`;
     htmlDrink += `</li>`;
   }
   drinksList.innerHTML = htmlDrink;
+  favCocktails();
 }
 
 
@@ -68,3 +73,37 @@ function handleClickButton(event) {
 //evento
 
 searchButton.addEventListener('click', handleClickButton);
+
+
+//listado de favoritos
+
+//array con el listado de favoritos elegidos
+
+let userFavCocktails = [];
+
+// función manejadora click en la bebida seleccionada
+
+
+function handleClickSelectedDrink(event){
+  console.log(event.currentTarget.id);
+  const idCocktail = event.currentTarget.id; //id que identifica a cada cóctel
+
+  //buscar con find si la bebida seleccionada está en el listado completo
+
+  const drinkFound = cocktailList.find(select=>{
+    return select.idDrink === idCocktail;
+  });
+
+  //busca la posición en el listado de favoritos
+
+  const drinkIndex = userFavCocktails.findIndex(select=>{
+    return select.idDrink === idCocktail;
+  });
+
+  // si no lo encuentra,me lo añade
+
+  if(drinkIndex === -1){
+    userFavCocktails.push(drinkFound);
+    console.log(userFavCocktails);
+  }
+}

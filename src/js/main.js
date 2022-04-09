@@ -104,6 +104,7 @@ function handleClickSelectedDrink(event){
   if(drinkIndex === -1){
     userFavCocktails.push(drinkFound);
   }
+  drinkInLocalStorage();
   paintCocktail();
   paintFavDrinks();
 }
@@ -120,5 +121,30 @@ function paintFavDrinks() {
     htmlDrink += `</li>`;
   }
   favDrinksList.innerHTML = htmlDrink;
-  
+  favCocktails();
 }
+
+// almacenar el listado de favoritos en el localStorage
+
+const drinkFromLocalStorage = () => {
+  const localStorageDrink = localStorage.getItem('favDrinks');
+  if(localStorageDrink !== null){
+    userFavCocktails = JSON.parse(localStorageDrink);
+    paintFavDrinks();
+    paintCocktail();
+
+  }
+};
+
+
+const drinkInLocalStorage = () =>{
+  const stringifyFav = JSON.stringify(userFavCocktails);
+  localStorage.setItem('fav', stringifyFav);
+};
+
+drinkFromLocalStorage();
+paintFavDrinks();
+
+//repasar código LocalStorage, no funciona al recargar la página
+
+

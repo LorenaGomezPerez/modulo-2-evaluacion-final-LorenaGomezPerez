@@ -24,6 +24,7 @@ const drinksList = document.querySelector('.js-cocktailList');
 const favDrinksList = document.querySelector('.js-favCocktailsList');
 
 let cocktailList = [];
+let userFavCocktails = [];
 
 function getApiCocktail(){
   const inputFinder = cocktailFinder.value;
@@ -67,7 +68,6 @@ function paintCocktail() {
 function handleClickButton(event) {
   event.preventDefault();
   getApiCocktail();
-  paintCocktail();
 }
 
 //evento
@@ -79,13 +79,12 @@ searchButton.addEventListener('click', handleClickButton);
 
 //array con el listado de favoritos elegidos
 
-let userFavCocktails = [];
+
 
 // función manejadora click en la bebida seleccionada
 
 
 function handleClickSelectedDrink(event){
-  console.log(event.currentTarget.id);
   const idCocktail = event.currentTarget.id; //id que identifica a cada cóctel
 
   //buscar con find si la bebida seleccionada está en el listado completo
@@ -104,6 +103,22 @@ function handleClickSelectedDrink(event){
 
   if(drinkIndex === -1){
     userFavCocktails.push(drinkFound);
-    console.log(userFavCocktails);
   }
+  paintCocktail();
+  paintFavDrinks();
+}
+
+//funcion para que pinte en la lista de favoritos
+
+
+function paintFavDrinks() {
+  let htmlDrink = '';
+  for (const drink of userFavCocktails) {
+    htmlDrink += `<li class="cocktail-list js-liDrink" id=${drink.idDrink}>`;
+    htmlDrink += `<h2>${drink.strDrink}</h2>`;
+    htmlDrink += `<img src="${drink.strDrinkThumb}" width="200"/>`;
+    htmlDrink += `</li>`;
+  }
+  favDrinksList.innerHTML = htmlDrink;
+  
 }

@@ -8,30 +8,9 @@
     <link rel="stylesheet" href="./assets/css/main.css" />
   </head>
   <body>
-    <header>
-      <h1>Buscador cócteles</h1>
-      <input
-        class="js-cocktailFinder"
-        type="text"
-        id="name"
-        name="name"
-        placeholder=""
-        value=""
-      />
-
-      <button class="js-searchButton">Buscar</button>
-      <button class="btn">Reset</button>
-    </header>
-    <main>
-      <h2>Cócteles favoritos</h2>
-      <ul class="js-favCocktailsList"></ul>
-
-      <h2>Lista</h2>
-      <ul class="js-cocktailList"></ul>
-    </main>
-    <footer>
-      <p>© Todos los derechos reservados</p>
-    </footer>
+    <include src="./partials/header.html"></include>
+    <include src="./partials/main.html"></include>
+    <include src="./partials/footer.html"></include>
     <script type="text/javascript" src="./assets/js/main.js"></script>
   </body>
 </html>

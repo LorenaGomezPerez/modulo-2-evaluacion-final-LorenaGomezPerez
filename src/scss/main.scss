@@ -7,13 +7,53 @@
 // @import 'layout/footer';
 // @import 'pages/index';
 
+//clases header
 
-.btn{
-    background-color: aquamarine;
-    border: 2px solid blue;
+.search-text{
+    
 }
 
-.class-drink{
-    background-color: aquamarine;
-    color:blueviolet;
+.finder{
+    border-color:black;
+    border-radius: 5px;
+}
+
+
+.search-button{
+    background-color: coral;
+    color:black;
+    border-radius: 5px;
+}
+
+.btnReset{
+    background-color: darkcyan;
+    color: black;
+    border-radius: 5px;
+}
+
+
+// clases main
+
+.text-title{
+    text-align: center;
+}
+
+.favorites{
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+}
+
+.cocktails{
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+}
+
+.favorites-list{
+    border: 1px solid blue;
+}
+
+.cocktails-list{
+    border: 1px solid orange;
 }

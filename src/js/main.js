@@ -59,7 +59,7 @@ function paintCocktail() {
     htmlDrink += `<h2>${drink.strDrink}</h2>`;
     //condicional por si alguno de los cócteles que devuelve el API no tiene imagen
     if(drink.strDrinkThumb === ''){
-      htmlDrink += `<img src="${brokenImage}`;
+      htmlDrink += `<img src="${brokenImage}"`;
     } else {
       htmlDrink += `<img src="${drink.strDrinkThumb}" width="200"/>`;
     }
@@ -68,7 +68,7 @@ function paintCocktail() {
   drinksList.innerHTML = htmlDrink;
   favCocktails();
 }
- 
+
 //Función manejadora
 
 function handleClickButton(event) {
@@ -110,9 +110,9 @@ function handleClickSelectedDrink(event){
   if(drinkIndex === -1){
     userFavCocktails.push(drinkFound);
   }
-  drinkInLocalStorage();
   paintCocktail();
   paintFavDrinks();
+  drinkInLocalStorage();
 }
 
 //funcion para que pinte en la lista de favoritos
@@ -120,7 +120,7 @@ function handleClickSelectedDrink(event){
 
 function paintFavDrinks() {
   let htmlDrink = '';
-  for (const drink of userFavCocktails) { 
+  for (const drink of userFavCocktails) {
 
     //cambio las clases de los cocktail si son favoritos
 
@@ -130,8 +130,8 @@ function paintFavDrinks() {
     });
 
     if(drinkIndex !== -1){
-      classDrink = 'class-drink'}
-    else{
+      classDrink = 'class-drink';
+    } else{
       classDrink = '';
     }
     htmlDrink += `<li class="cocktail-list js-liDrink ${classDrink}" id=${drink.idDrink}>`;
@@ -140,29 +140,23 @@ function paintFavDrinks() {
     htmlDrink += `</li>`;
   }
   favDrinksList.innerHTML = htmlDrink;
-  favCocktails();
 }
 
 // almacenar el listado de favoritos en el LocalStorage
 
-const drinkFromLocalStorage = () => {
-  const localStorageDrink = localStorage.getItem('favDrinks');
+function drinkFromLocalStorage() {
+  const localStorageDrink = localStorage.getItem('fav');
   if(localStorageDrink !== null){
-    userFavCocktails = JSON.parse(localStorageDrink);
+    const arrayFav = JSON.parse(localStorageDrink);
+    userFavCocktails = arrayFav;
     paintFavDrinks();
-    paintCocktail();
-
   }
-};
+}
 
 
-const drinkInLocalStorage = () =>{
+function drinkInLocalStorage() {
   const stringifyFav = JSON.stringify(userFavCocktails);
   localStorage.setItem('fav', stringifyFav);
-};
+}
 
 drinkFromLocalStorage();
-paintFavDrinks();
-
-//repasar código LocalStorage, no funciona al recargar la página
-

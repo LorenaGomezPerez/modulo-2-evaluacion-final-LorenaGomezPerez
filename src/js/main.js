@@ -53,16 +53,22 @@ function paintCocktail() {
   let htmlDrink = '';
   for (const drink of cocktailList) {
 
+    const brokenImage = `https://via.placeholder.com/210x295/ffffff/666666/?text=image`;
+
     htmlDrink += `<li class="cocktail-list js-liDrink" id=${drink.idDrink}>`;
     htmlDrink += `<h2>${drink.strDrink}</h2>`;
-    htmlDrink += `<img src="${drink.strDrinkThumb}" width="200"/>`;
+    //condicional por si alguno de los cócteles que devuelve el API no tiene imagen
+    if(drink.strDrinkThumb === ''){
+      htmlDrink += `<img src="${brokenImage}`;
+    } else {
+      htmlDrink += `<img src="${drink.strDrinkThumb}" width="200"/>`;
+    }
     htmlDrink += `</li>`;
   }
   drinksList.innerHTML = htmlDrink;
   favCocktails();
 }
-
-
+ 
 //Función manejadora
 
 function handleClickButton(event) {
@@ -114,8 +120,21 @@ function handleClickSelectedDrink(event){
 
 function paintFavDrinks() {
   let htmlDrink = '';
-  for (const drink of userFavCocktails) {
-    htmlDrink += `<li class="cocktail-list js-liDrink" id=${drink.idDrink}>`;
+  for (const drink of userFavCocktails) { 
+
+    //cambio las clases de los cocktail si son favoritos
+
+    let classDrink = '';
+    const drinkIndex = userFavCocktails.findIndex(select=>{
+      return select.idDrink === drink.idDrink;
+    });
+
+    if(drinkIndex !== -1){
+      classDrink = 'class-drink'}
+    else{
+      classDrink = '';
+    }
+    htmlDrink += `<li class="cocktail-list js-liDrink ${classDrink}" id=${drink.idDrink}>`;
     htmlDrink += `<h2>${drink.strDrink}</h2>`;
     htmlDrink += `<img src="${drink.strDrinkThumb}" width="200"/>`;
     htmlDrink += `</li>`;
@@ -124,7 +143,7 @@ function paintFavDrinks() {
   favCocktails();
 }
 
-// almacenar el listado de favoritos en el localStorage
+// almacenar el listado de favoritos en el LocalStorage
 
 const drinkFromLocalStorage = () => {
   const localStorageDrink = localStorage.getItem('favDrinks');
@@ -146,5 +165,4 @@ drinkFromLocalStorage();
 paintFavDrinks();
 
 //repasar código LocalStorage, no funciona al recargar la página
-
 

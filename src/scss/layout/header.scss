@@ -2,7 +2,7 @@
     background-image: url(../images/cocteles.jpg);
     background-size: cover;
     background-position: center;
-    height: 50px;
+    height: 204px;
   }
 
 .search-section {
@@ -42,4 +42,21 @@
     color:antiquewhite;
     border-radius: 5px;
     border: 2px solid rgb(105, 71, 121);
+}
+
+@media all and (min-width: 768px) {
+  .header {
+    display: flex;
+    align-content: stretch;
+    flex-direction: row-reverse;
+    justify-content: space-around;
+    align-items: flex-start;
+   
+  }
+  .search-section{
+    display: flex;
+    align-items: flex-end;
+    
+  }
+
 }

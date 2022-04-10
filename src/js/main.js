@@ -56,12 +56,12 @@ function paintCocktail() {
     const brokenImage = `https://via.placeholder.com/210x295/ffffff/666666/?text=image`;
 
     htmlDrink += `<li class="cocktail-list js-liDrink" id=${drink.idDrink}>`;
-    htmlDrink += `<h2>${drink.strDrink}</h2>`;
+    htmlDrink += `<h2 class="name-cocktail">${drink.strDrink}</h2>`;
     //condicional por si alguno de los cócteles que devuelve el API no tiene imagen
     if(drink.strDrinkThumb === ''){
       htmlDrink += `<img src="${brokenImage}"`;
     } else {
-      htmlDrink += `<img src="${drink.strDrinkThumb}" width="200"/>`;
+      htmlDrink += `<img class="image-cocktail" src= "${drink.strDrinkThumb}"/>`;
     }
     htmlDrink += `</li>`;
   }
@@ -135,8 +135,8 @@ function paintFavDrinks() {
       classDrink = '';
     }
     htmlDrink += `<li class="cocktail-list js-liDrink ${classDrink}" id=${drink.idDrink}>`;
-    htmlDrink += `<h2>${drink.strDrink}</h2>`;
-    htmlDrink += `<img src="${drink.strDrinkThumb}" width="200"/>`;
+    htmlDrink += `<h2 class="name-cocktail">${drink.strDrink}</h2>`;
+    htmlDrink += `<img class="image-cocktail" src="${drink.strDrinkThumb}"/>`;
     htmlDrink += `</li>`;
   }
   favDrinksList.innerHTML = htmlDrink;

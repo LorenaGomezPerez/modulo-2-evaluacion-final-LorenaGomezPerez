@@ -4,11 +4,19 @@
     background-position: center;
     height: 204px;
   }
+  @media all and (min-width: 768px) {
+    .header {
+      height: 453px;
+      display: flex;
+      align-content: stretch;
+      flex-direction: row-reverse;
+      justify-content: space-around;
+      align-items: flex-start;
+    }
+  }
 
 .search-section {
     display: flex;
-    position: fixed;
-    z-index: 1;
     align-items: center;
     justify-content: space-evenly;
     align-content: center;
@@ -16,13 +24,29 @@
     flex-wrap: wrap;
     
   }
+  @media all and (min-width: 768px) {
+    
+  
+  .search-section{
+    display: flex;
+    align-items: stretch;
+    flex-direction: column;
+  }
+}
 
 .search-text{
     color:antiquewhite;
     border: 3px double rgba(194, 140, 38, 0.87);
     margin-top:20px;
     margin-bottom: 20px;
-    
+}
+
+  @media all and (min-width: 768px) {
+
+    .search-text{
+      font-size: 40px;
+      text-align: center;
+    }
 }
 
 .finder{
@@ -32,7 +56,13 @@
     border-radius: 8px;
 }
 
+  @media all and (min-width: 768px) {
+  .finder{
+    width: 300px;
+    height: 38px;
 
+  }
+}
 
 .btn{
     font-size: 16px;
@@ -43,20 +73,22 @@
     border-radius: 5px;
     border: 2px solid rgb(105, 71, 121);
 }
+@media all and (min-width: 768px) {
+  .btn{
+    width: 100px;
+    height: 38px;
+    font-size: 20px;
+  }
+}
 
 @media all and (min-width: 768px) {
-  .header {
+  
+  .search-div{
     display: flex;
-    align-content: stretch;
-    flex-direction: row-reverse;
-    justify-content: space-around;
-    align-items: flex-start;
-   
+    gap: 15px;
+    padding: 10px 20px 10px 20px
   }
-  .search-section{
-    display: flex;
-    align-items: flex-end;
-    
-  }
-
 }
+  
+
+

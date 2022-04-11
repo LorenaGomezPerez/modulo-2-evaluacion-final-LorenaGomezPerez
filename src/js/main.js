@@ -1,21 +1,5 @@
 'use strict';
 
-//1_enviamos petición al servidor, a una API(fetch)
-
-//2_ then es la promesa que nos devuelve el servidor, y recibe entre los paréntesis un función (response)
-
-//3_después esa respuesta la tenemos que transformar a formato json para que podamos acceder a cada uno de los datos (response.json)
-
-//4_Una vez transformada la respuesta, ahora la recogemos
-
-//constante para luego poder pintarla
-
-//1_obtener los datos de una API (fetch)
-//2_Los metemos en una función
-//3_ejecutamos la función
-
-//4_guardamos la información en un array (así podemos utilizarla más tarde en diferentes momentos)
-
 // constantes globales
 
 const cocktailFinder = document.querySelector('.js-cocktailFinder');
@@ -23,8 +7,12 @@ const searchButton = document.querySelector('.js-searchButton');
 const drinksList = document.querySelector('.js-cocktailList');
 const favDrinksList = document.querySelector('.js-favCocktailsList');
 
+// arrays vacíos
+
 let cocktailList = [];
 let userFavCocktails = [];
+
+// petición a la API para que me devuelva los datos
 
 function getApiCocktail(){
   const inputFinder = cocktailFinder.value;
@@ -76,14 +64,7 @@ function handleClickButton(event) {
   getApiCocktail();
 }
 
-//evento
 
-searchButton.addEventListener('click', handleClickButton);
-
-
-//listado de favoritos
-
-//array con el listado de favoritos elegidos
 
 
 
@@ -141,6 +122,11 @@ function paintFavDrinks() {
   }
   favDrinksList.innerHTML = htmlDrink;
 }
+
+//evento que escucha cuando la usuaria hace click en el botón de buscar
+
+searchButton.addEventListener('click', handleClickButton);
+
 
 // almacenar el listado de favoritos en el LocalStorage
 

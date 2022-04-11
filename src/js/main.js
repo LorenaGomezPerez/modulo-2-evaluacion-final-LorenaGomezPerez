@@ -1,18 +1,20 @@
 'use strict';
 
-// constantes globales
+// Constantes globales.
 
 const cocktailFinder = document.querySelector('.js-cocktailFinder');
 const searchButton = document.querySelector('.js-searchButton');
 const drinksList = document.querySelector('.js-cocktailList');
 const favDrinksList = document.querySelector('.js-favCocktailsList');
+const resetButton = document.querySelector('.js-resetButton');
 
-// arrays vacíos
+
+// Arrays de las listas de cócteles.
 
 let cocktailList = [];
 let userFavCocktails = [];
 
-// petición a la API para que me devuelva los datos
+// Petición a la API para que me devuelva los datos.
 
 function getApiCocktail(){
   const inputFinder = cocktailFinder.value;
@@ -24,28 +26,17 @@ function getApiCocktail(){
     });
 }
 
-//función cócteles favoritos
 
-function favCocktails(){
 
-  //listener cuando la usuaria de click al cocktail elegido
-  const liDrink = document.querySelectorAll('.js-liDrink');
-  for (const cocktail of liDrink){
-    cocktail.addEventListener('click', handleClickSelectedDrink);
-  }
-}
-
-// función para que pinte la información obtenida
+// Función para que pinte la información obtenida. Dentro de ella condicional por si alguno de los cócteles que devuelve el API no tiene imagen.
 
 function paintCocktail() {
   let htmlDrink = '';
   for (const drink of cocktailList) {
-
     const brokenImage = `https://via.placeholder.com/210x295/ffffff/666666/?text=image`;
 
     htmlDrink += `<li class="cocktail-list js-liDrink" id=${drink.idDrink}>`;
     htmlDrink += `<h2 class="name-cocktail">${drink.strDrink}</h2>`;
-    //condicional por si alguno de los cócteles que devuelve el API no tiene imagen
     if(drink.strDrinkThumb === ''){
       htmlDrink += `<img src="${brokenImage}"`;
     } else {
@@ -57,36 +48,38 @@ function paintCocktail() {
   favCocktails();
 }
 
-//Función manejadora
+// Función cócteles favoritos-escucho cuando la usuaria hace "click" sobre un cóctel.
+
+function favCocktails(){
+  const liDrink = document.querySelectorAll('.js-liDrink');
+  for (const cocktail of liDrink){
+    cocktail.addEventListener('click', handleClickSelectedDrink);
+  }
+}
+
+//Función manejadora del evento click.
 
 function handleClickButton(event) {
   event.preventDefault();
   getApiCocktail();
 }
 
-
-
-
-
-// función manejadora click en la bebida seleccionada
-
-
 function handleClickSelectedDrink(event){
   const idCocktail = event.currentTarget.id; //id que identifica a cada cóctel
 
-  //buscar con find si la bebida seleccionada está en el listado completo
+  // Buscar con find si la bebida seleccionada está en el listado completo.
 
   const drinkFound = cocktailList.find(select=>{
     return select.idDrink === idCocktail;
   });
 
-  //busca la posición en el listado de favoritos
+  // BuscaR la posición en el listado de favoritos.
 
   const drinkIndex = userFavCocktails.findIndex(select=>{
     return select.idDrink === idCocktail;
   });
 
-  // si no lo encuentra,me lo añade
+  // si no lo encuentra, me lo añade.
 
   if(drinkIndex === -1){
     userFavCocktails.push(drinkFound);
@@ -96,14 +89,11 @@ function handleClickSelectedDrink(event){
   drinkInLocalStorage();
 }
 
-//funcion para que pinte en la lista de favoritos
-
+//función para que pinte en la lista de favoritos. Además cambio la clase de los cocktail si son favoritos.
 
 function paintFavDrinks() {
   let htmlDrink = '';
   for (const drink of userFavCocktails) {
-
-    //cambio las clases de los cocktail si son favoritos
 
     let classDrink = '';
     const drinkIndex = userFavCocktails.findIndex(select=>{
@@ -123,12 +113,14 @@ function paintFavDrinks() {
   favDrinksList.innerHTML = htmlDrink;
 }
 
-//evento que escucha cuando la usuaria hace click en el botón de buscar
+// Función que deja vacío el input de búsqueda y el listado de cócteles.
+function handleClickReset() {
+  drinksList.innerHTML = '';
+  cocktailFinder.value = '';
+}
 
-searchButton.addEventListener('click', handleClickButton);
 
-
-// almacenar el listado de favoritos en el LocalStorage
+// Almacenar el listado de favoritos en el LocalStorage.
 
 function drinkFromLocalStorage() {
   const localStorageDrink = localStorage.getItem('fav');
@@ -139,10 +131,19 @@ function drinkFromLocalStorage() {
   }
 }
 
-
 function drinkInLocalStorage() {
   const stringifyFav = JSON.stringify(userFavCocktails);
   localStorage.setItem('fav', stringifyFav);
 }
 
 drinkFromLocalStorage();
+
+
+// Evento que escucha cuando la usuaria hace click en el botón de buscar.
+
+searchButton.addEventListener('click', handleClickButton);
+
+// Evento que escucha cuando la usuaria hace click en el botón de reset.
+resetButton.addEventListener('click', handleClickReset);
+
+

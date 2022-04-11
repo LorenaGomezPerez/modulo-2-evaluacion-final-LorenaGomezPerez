@@ -114,7 +114,8 @@ function paintFavDrinks() {
 }
 
 // Función que deja vacío el input de búsqueda y el listado de cócteles.
-function handleClickReset() {
+function handleClickReset(event) {
+  event.preventDefault();
   drinksList.innerHTML = '';
   cocktailFinder.value = '';
 }

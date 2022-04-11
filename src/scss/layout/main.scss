@@ -23,7 +23,7 @@
     display: flex;
     flex-direction: column;
     list-style: none;
-    color:rgba(184, 143, 38, 0.738);
+    color: rgba(184, 143, 38, 0.738);
     text-align: center;
 }
 
@@ -43,6 +43,7 @@
 .image-cocktail{
     width:180px;
     border-radius: 4px;
+    text-align: center;
 }
 
 .cocktails-list{
@@ -58,4 +59,12 @@
       grid-template-columns: 1fr 1fr;
     }
 
+}
+
+// clase modificadora javascript
+
+.class-drink{
+    color:lightgoldenrodyellow;
+    list-style: none;
+    text-align: center;
 }
